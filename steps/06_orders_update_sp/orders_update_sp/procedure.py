@@ -35,7 +35,7 @@ def merge_order_updates(session):
     metadata_col_to_update = {"META_UPDATED_AT": F.current_timestamp()}
     updates = {**cols_to_update, **metadata_col_to_update}
 
-    # merge into DIM_CUSTOMER
+    # merge into DIM_ORDER
     target.merge(source, target['ORDER_DETAIL_ID'] == source['ORDER_DETAIL_ID'], \
                         [F.when_matched().update(updates), F.when_not_matched().insert(updates)])
 
