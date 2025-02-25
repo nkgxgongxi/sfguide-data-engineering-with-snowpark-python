@@ -18,6 +18,11 @@ USE SCHEMA RAW_POS;
 
 ALTER WAREHOUSE HOL_WH SET WAREHOUSE_SIZE = XLARGE WAIT_FOR_COMPLETION = TRUE;
 
+-- It seems like table is not recognized by the accessing user. 
+select *
+from order_header
+limit 10;
+
 COPY INTO ORDER_HEADER
 FROM @external.frostbyte_raw_stage/pos/order_header/year=2022
 FILE_FORMAT = (FORMAT_NAME = EXTERNAL.PARQUET_FORMAT)
